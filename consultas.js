@@ -1,62 +1,55 @@
 /* 
   Ejercitación: Consultas Raw en MongoDB
-
-  Escribe en cada variable el objeto JSON/BSON de búsqueda, modificación o ordenamiento
-  que utilizarías en MongoDB Compass o Atlas.
-  
-  Ejemplo: Si te piden buscar el equipo "Argentina", escribirías:
-  const buscarArgentina = { equipo: "Argentina" };
 */
 
-// 1. Búsqueda exacta: Escribe el filtro para encontrar a los equipos del continente "Europa".
+// 1. Búsqueda exacta: equipos del continente "Europa"
 const buscarEuropa = {
-  // Tu código aquí
+  continente: 'Europa',
 };
 
-// 2. Búsqueda parcial ($in): Filtra los equipos que pertenezcan al grupo "C" o "F".
+// 2. Búsqueda parcial ($in): equipos del grupo "C" o "F"
 const buscarGruposCOF = {
-  // Tu código aquí
+  grupo: { $in: ['C', 'F'] },
 };
 
-// 3. Búsqueda parcial ($regex): Filtra los equipos cuyo técnico contenga la palabra "Lionel" (sin importar mayúsculas/minúsculas).
+// 3. Búsqueda parcial ($regex): técnico que contenga "Lionel"
 const buscarTecnicoLionel = {
-  // Tu código aquí
+  tecnico: { $regex: 'Lionel', $options: 'i' },
 };
 
-// 4. Búsqueda con operador $gt: Filtra los equipos que tengan estrictamente más de 1 "campeonatos_mundiales".
+// 4. Búsqueda con $gt: más de 1 campeonato mundial
 const buscarMasDeUnMundial = {
-  // Tu código aquí
+  campeonatos_mundiales: { $gt: 1 },
 };
 
-// 3. Búsqueda en subdocumentos ($gte): Filtra los equipos donde el rendimiento tenga "goles_a_favor" mayor o igual a 15.
+// 5. Búsqueda en subdocumentos ($gte): goles_a_favor >= 15
 const buscarGolesAFavor = {
-  // Tu código aquí
+  'rendimiento.goles_a_favor': { $gte: 15 },
 };
 
-// 6. Búsqueda en Arreglos: Filtra los equipos que tengan al menos un jugador que juegue en el "Paris Saint-Germain".
+// 6. Búsqueda en arrays: jugadores del Paris Saint-Germain
 const buscarJugadoresPSG = {
-  // Tu código aquí
+  'jugadores.club_actual': 'Paris Saint-Germain',
 };
 
-// 7. Operadores Lógicos ($or): Filtra equipos que pertenezcan al grupo "F" O que sean del continente "Sudamérica".
+// 7. Operadores lógicos ($or): grupo "F" O continente "Sudamérica"
 const buscarGrupoFOAmerica = {
-  // Tu código aquí
+  $or: [{ grupo: 'F' }, { continente: 'Sudamérica' }],
 };
 
-// 8. Búsqueda exacta (Rivales de Argentina): Filtra los equipos que pertenezcan al grupo "J".
+// 8. Búsqueda exacta: equipos del grupo "J"
 const buscarGrupoJ = {
-  // Tu código aquí
+  grupo: 'J',
 };
 
-// 9. Ordenamiento (Sort): Escribe el objeto para ordenar los resultados por "rendimiento.ganados" de forma descendente (del mayor al menor).
+// 9. Ordenamiento: por rendimiento.ganados descendente
 const ordenarPorGanados = {
-  // Tu código aquí
+  'rendimiento.ganados': -1,
 };
 
-// 10. Modificación ($set): Escribe el OPERADOR de actualización necesario para cambiar el nombre del "tecnico" a "Lionel Scaloni (Campeón)". 
-// Nota: Solo el operador, no incluyas el filtro.
+// 10. Modificación ($set): cambiar técnico a "Lionel Scaloni (Campeón)"
 const actualizarTecnicoCampeon = {
-  // Tu código aquí
+  $set: { tecnico: 'Lionel Scaloni (Campeón)' },
 };
 
 module.exports = {
@@ -69,5 +62,5 @@ module.exports = {
   buscarGrupoFOAmerica,
   buscarGrupoJ,
   ordenarPorGanados,
-  actualizarTecnicoCampeon
+  actualizarTecnicoCampeon,
 };
